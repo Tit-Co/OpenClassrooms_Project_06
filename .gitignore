@@ -1,0 +1,15 @@
+# Virtual environments
+venv/
+env/
+
+# Temp files
+__pycache__
+*/__pycache__
+*.pyc
+
+# Ide
+.vscode/
+.idea/
+
+# Api rest
+api/
