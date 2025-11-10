@@ -1,4 +1,4 @@
-## CHESS CLUB MANAGER - OpenClassrooms Project 06
+## WEB APP - OpenClassrooms Project 06
 **Develop a user interface for Python web application**
 
 ## DESCRIPTION
