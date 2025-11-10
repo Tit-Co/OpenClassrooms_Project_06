@@ -1,0 +1,9 @@
+body, main, header {
+    max-width: 100%;
+    margin: 50px;
+}
+div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
