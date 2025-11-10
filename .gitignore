@@ -13,3 +13,5 @@ __pycache__
 
 # Api rest
 api/
+
+app/

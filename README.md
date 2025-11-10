@@ -14,47 +14,10 @@ The goal was to develop a Python web application capable of:
 
 ![Folders and files structure](./structure.png)
 
-## INSTALLATION
-
-### - Clone the repository :
-`git clone https://github.com/Tit-Co/OpenClassrooms_Project_06.git`
-
-### - Navigate into the project directory :
-`cd OpenClassrooms_Project_06`
-
-### - Create a virtual environment and dependencies :
-#### Option 1 - with [uv](https://docs.astral.sh/uv/)
-
-`uv` is an environment and dependencies manager.
-
-### - Install environment and dependencies
-
-`uv sync`
-
-#### Option 2 - with pip
-
-### - Install the virtual env :
-
-`python -m venv env`
-
-### - Activate the virtual env :
-`source env/bin/activate`  
-Or  
-`env\Scripts\activate` on Windows  
-
-### - Install dependencies 
-#### Option 1 - with [uv](https://docs.astral.sh/uv/)
-
-`uv pip install -U -r requirements.txt`
-
-#### Option 2 - with pip
-
-`pip install -r requirements.txt` 
-
 ### USAGE
 
-### Run the main script
-`python ./app/main.py`
+### Open the HTML page in your browser
+`index.html`
 
 ### EXAMPLES
 
@@ -66,8 +29,6 @@ Or
 - 
 -
 
-
-![Python](https://img.shields.io/badge/python-3.13-blue.svg)
 ![Html](https://img.shields.io/badge/html-5-blue.svg)
 ![Css](https://img.shields.io/badge/css-3-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
@@ -75,4 +36,4 @@ Or
 ## AUTHOR
 **Name**: Nicolas MARIE  
 **Track**: Python Developer – OpenClassrooms  
-**Project – Develop a Python web app : OCMovies – November 2025**
+**Project – Develop a web app : OCMovies – November 2025**
