@@ -82,11 +82,30 @@ function displayCategories(categoryList) {
     }
 }
 
-getBestMovie().then(bestMovieEver => {
-        console.log("\n• The best movie from all genres is :");
-        displayMovie(bestMovieEver);
-    }
-)
+window.addEventListener("load", async () => {
+  const bestMovie = await getBestMovie();
+
+  const container = document.getElementById("bestMovieContent");
+  container.innerHTML = "";
+
+  const img = document.createElement("img");
+  img.src = bestMovie.imageUrl;
+  img.alt = `${bestMovie.title} - image`;
+  img.title = `${bestMovie.title} - image`;
+  img.onerror = () => {
+    img.src = "./assets/images/placeholder.png"; // ton placeholder
+  };
+
+  const infoDiv = document.createElement("div");
+  infoDiv.innerHTML = `
+    <h2>${bestMovie.title}</h2>
+    <p>${bestMovie.description}</p>
+    <a href="#">Détails</a>
+  `;
+
+  container.appendChild(img);
+  container.appendChild(infoDiv);
+});
 
 getBestMoviesFromAllGenres().then(bestMoviesFromAllGenres => {
     console.log("\n• The best movies from all genres are :");

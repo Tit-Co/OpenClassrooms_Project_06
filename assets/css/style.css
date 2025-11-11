@@ -1,9 +1,333 @@
-body, main, header {
-    max-width: 100%;
-    margin: 50px;
+body {
+    max-width: 1054px;
+    margin: auto;
+    font-family: "Oswald", sans-serif;
+    font-style: normal;
+    letter-spacing: 0;
+    line-height: 130%;
 }
-div {
+
+main {
+
+    max-width:837px;
+    margin: 0 auto 50px auto;
+    align-content: center;
+}
+
+header {
+    max-width:837px;
+    margin: 50px auto 0 auto;
+    align-content: center;
+}
+
+h1 {
+    max-width:837px;
+    font-weight: 600;
+    font-size: 48px;
+    vertical-align: middle;
+    color: #000000;
+    margin: 60px 0;
+}
+
+.banner {
+    background: #61787F;
+    border: 1px solid #000000;
+    width: 837px;
+    height: 122px;
+}
+
+.banner img {
+    margin: 20px;
+    width: 127px;
+    height: 94px;
+}
+
+.banner h3 {
+    position: absolute;
+    font-weight: 300;
+    font-size: 40px;
+    vertical-align: middle;
+    color: #FFFFFF;
+    margin: 0 35px;
+    top: 85px;
+    left: 700px;
+    line-height: 150%;
+}
+
+.bestMovieContent{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    max-width: 830px;
+    height: 370px;
+    border: 6px solid #000000;
+}
+
+.bestMovieContent div {
+    display: grid;
+    width: 835px;
+    margin: 15px 0 30px 30px;
+    grid-template-rows: 100px 116px 123px;
+}
+
+.bestMovieContent img{
+    margin-left: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.bestMovieContent h2{
+    display: block;
+    font-weight: 600;
+    font-size: 48px;
+    color: #000000;
+    margin: 10px;
+    line-height: 100%;
+}
+
+.bestMovieContent p {
+    display: block;
+    font-weight: 200;
+    font-size: 28px;
+    vertical-align: middle;
+    margin-top: 0;
+    margin-left: 15px;
+    width: 501px;
+    height: 113px;
+    line-height: 150%;
+}
+
+.bestMovieContent a {
+    display: block;
+    width: 140px;
+    height: 35px;
+    background: #FA0B0B;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 30px;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 285px;
+    padding: 30px 40px 25px 40px;
+    border-radius: 35px;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.moviesContent{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 50px;
+    z-index: 1;
+    max-width: 840px;
+}
+
+.moviesImageBlock{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 250px;
+    height: 250px;
+    z-index: 1;
+}
+.moviesImageBlock div{
+    position: absolute;
+    background: rgba(0,0,0,0.5);
+    margin-top: 35px;
+    width: 250px;
+    height: 102px;
+    z-index: 2;
+}
+
+.moviesImageBlock div p{
+    position: absolute;
+    display: block;
+    z-index: 3;
+    margin: 25px;
+    font-weight: 600;
+    font-size: 24px;
+    vertical-align: middle;
+    color: #FFFFFF;
+}
+
+.moviesImageBlock div a{
+    position: absolute;
+    display: block;
+    width: 80px;
+    height: 20px;
+    z-index: 4;
+    border-radius: 25px;
+    background: #2D2C2C;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 155px;
+    margin-top: 65px;
+    padding-top: 5px;
+}
+
+.moviesContent a{
+    display: inline-block;
+    width: 214px;
+    height: 30px;
+    border-radius: 25px;
+    background: #FA0B0B;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 10px;
+    text-decoration: none;
+}
+
+.othersCategoryTitle h1{
+    display: inline-block;
+}
+
+.othersCategoryTitle select {
+    font-family: "Oswald", sans-serif;
+    font-style: normal;
+    letter-spacing: 0;
+    line-height: 150%;
+    display: inline-block;
+    width: 404px;
+    height: 78px;
+    margin: 20px;
+    background: #FFFFFF;
+    font-weight: 600;
+    font-size: 36px;
+    vertical-align: middle;
+}
+
+.othersCategoryTitle option {
+    font-family: "Oswald", sans-serif;
+    font-style: normal;
+    letter-spacing: 0;
+    line-height: 150%;
+    display: inline-block;
+    width: 404px;
+    height: 78px;
+    margin: 20px;
+    background: #FFFFFF;
+    font-weight: 600;
+    font-size: 36px;
+    vertical-align: middle;
+}
+
+/* Modal */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 5;
+    left: 0;
+    top: 50px;
+    width: 100%;
+    overflow: auto;
+    background-color: transparent;
+}
+
+.modal-content {
+    display: block;
+    position: relative;
+    line-height: 130%;
+    background-color: #fefefe;
+    margin: 0 auto;
+    border: 6px solid #000000;
+    width: 778px;
+    height: 100%;
+    padding: 15px 0 15px 15px;
+}
+
+.modal-content table, tr, td{
+    width: 100%;
+}
+.close {
+    display: block;
+    position: relative;
+    width: 25px;
+}
+.close span{
+    position: absolute;
+    display: block;
+    margin: -20px 0;
+    color: red;
+    font-weight: 600;
+    font-size: 50px;
+}
+
+.close-button {
+    display: block;
+    width: 214px;
+    margin: auto;
+    align-content: center;
+}
+
+.close-button a{
+    display: block;
+    color: #FFFFFF;
+    background: #FA0B0B;
+    border-radius: 25px;
+    width: 214px;
+    height: 25px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 10px 0;
+    padding-top:6px;
+}
+
+.modal-content h1{
+    margin: 15px 0 10px 0;
+}
+
+.subtitle{
+    font-weight: 600;
+    font-size: 24px;
+    padding: 8px 0;
+}
+
+.directed-by{
+    font-weight: 400;
+    font-size: 24px;
+    margin: 30px 0 10px 0;
+}
+
+.directors{
+    font-weight: 300;
+    font-size: 24px;
+    margin: 10px 0 20px 0;
+}
+
+.description{
+    margin: 40px 20px 40px 0;
+    line-height: 130%;
+    font-weight: 300;
+    font-size: 24px;
+}
+
+.with{
+    margin: 3px 0;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.actors{
+    margin: 0 20px 50px 0;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.tablet-mobile-image{
+    display: none;
+    align-content: center;
+    margin: auto;
+    width: 409px;
+    height: 602px;
 }
