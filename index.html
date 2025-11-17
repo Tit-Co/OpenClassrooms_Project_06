@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <script src="./assets/js/apiClient.js" defer></script>
     <script src="./assets/js/manager.js" defer></script>
+    <script src="./assets/js/ui.js" defer></script>
     <script src="./assets/js/main.js" defer></script>
 </head>
 <body>
@@ -26,8 +27,10 @@
                 <div>
                     <h2>Meilleur Film - titre</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <a href="">Détails</a>
                 </div>
+            </div>
+            <div class="bestMovieDetails">
+                <a id="bestMovieDetails" href="">Détails</a>
             </div>
         </section>
         <section id="bestMoviesSection">
@@ -175,7 +178,7 @@
             </div>
         </section>
         <section id="othersCategorySection">
-            <div class="othersCategoryTitle">
+            <div class="othersCategoryTitle" id="othersCategoryTitle">
                 <h1>Autres:</h1>
                 <select name="othersCategoryList" id="othersCategorySelect">
                     <option value="action" selected>Films d'action</option>
@@ -227,19 +230,19 @@
                 <a href="">Voir plus</a>
             </div>
         </section>
-        <div id="myModal" class="modal">
-          <div class="modal-content">
+        <div class="modal" id="modal">
+          <div class="modalContent" id="modalContent">
               <table>
                   <tr>
                       <td><h1>The Big Lebowski</h1></td>
                       <td rowspan="6">
                           <div>
-                            <img src="https://picsum.photos/227/334">
+                            <img src="https://picsum.photos/227/334" alt="Modal desktop - Image Film">
                           </div>
                       </td>
                       <td>
                           <div class="close">
-                            <span>&times;</span>
+                            <a href="#" id="closeCross"><span>&times;</span></a>
                           </div>
                       </td>
                   </tr>
@@ -272,14 +275,14 @@
                   <p class="description">When "the dude" Lebowski is mistaken for a millionaire Lebowski, two thugs urinate on his rug to coerce him into paying a debt he knows nothing about. While attempting to gain recompense for the ruined rug from his wealthy counterpart, he accepts a one-time job with high pay-off. He enlists the help of his bowling buddy, Walter, a gun-toting Jewish-convert with anger issues. Deception leads to more trouble, and it soon seems that everyone from porn empire tycoons to nihilists want something from The Dude.</p>
               </div>
               <div class="tablet-mobile-image">
-                  <img src="https://picsum.photos/409/602">
+                  <img src="https://picsum.photos/409/602" alt="Modal mobile - Image Film">
               </div>
               <div>
                   <p class="with">Avec:</p>
                   <p class="actors">David Huddleston, Flea, Jack Kehler, Jeff Bridges, Jimmie Dale Gilmore, John Goodman, John Turturro, Julianne Moore, Mark Pellegrino, Peter Stormare, Philip Moon, Philip Seymour Hoffman, Steve Buscemi, Tara Reid, Torsten Voges</p>
               </div>
-              <div class="close-button">
-                  <a>Fermer</a>
+              <div class="closeButton">
+                  <a href="#" id="closeButton">Fermer</a>
               </div>
 
           </div>

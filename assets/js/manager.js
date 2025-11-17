@@ -52,6 +52,79 @@ function getMovieObject(movieDict){
         duration, countries, boxOffice, url, imdbUrl, votes, imageUrl, description)
 }
 
+function computeCategory(category) {
+    let cat ="";
+    switch(category) {
+        case "Action" :
+            cat = "Films d'action";
+            break;
+        case "Adult" :
+            cat = "Adulte";
+            break;
+        case "Adventure" :
+            cat = "Films d'aventures";
+            break;
+        case "Animation" :
+            cat = "Films d'animation";
+            break;
+        case "Biography" :
+            cat = "Biographies";
+            break;
+        case "Comedy" :
+            cat = "Comedies";
+            break;
+        case "Documentary" :
+            cat = "Documentaires";
+            break;
+        case "Drama" :
+            cat = "Drames";
+            break;
+        case "Family" :
+            cat = "Famille";
+            break;
+        case "Fantasy" :
+            cat = "Films fantastiques";
+            break;
+        case "Film-noir" :
+            cat = "Films Noirs";
+            break;
+        case "History" :
+            cat = "Histoire";
+            break;
+        case "Horror" :
+            cat = "Films d'horreur";
+            break;
+        case "Music" :
+            cat = "Musique";
+            break;
+        case "Musical" :
+            cat = "Comédies musicales";
+            break;
+        case "Mystery" :
+            cat = "Mystères";
+            break;
+        case "News" :
+            cat = "Informations";
+            break;
+        case "Reality-tv" :
+            cat = "Télé Réalité";
+            break;
+        case "Sci-fi" :
+            cat = "Science-fiction";
+            break;
+        case "War" :
+            cat = "Films de guerre";
+            break;
+        case "Western" :
+            cat = "Westerns";
+            break;
+        default :
+            cat = category;
+            break;
+    }
+    return cat;
+}
+
 function getMovieObjects(movieList) {
     let movies = [];
 
@@ -105,8 +178,8 @@ async function getBestMoviesFromAllGenres() {
     return getMovieObjects(await computeMovieDetails(movieList))
 }
 
-async function getBestMoviesFromCategory(category="Thriller"){
-    const movieList = await getMovies(6)
+async function getBestMoviesFromCategory(category){
+    const movieList = await getMovies(6, category)
 
     return getMovieObjects(await computeMovieDetails(movieList))
 }
