@@ -5,7 +5,7 @@
 
 This project was completed as part of the "Python Developer" path at OpenClassrooms.
 
-The goal was to develop a Python web application capable of:
+The goal was to develop the front-end interface of a Python web application capable of:
 - Visualizing a real-time ranking of interesting films.
 - Getting datas form 'OCMovies-API' API Rest
 - Displaying UI accordingly to the graphic design from Figma
@@ -16,18 +16,13 @@ The goal was to develop a Python web application capable of:
 
 ### USAGE
 
-### Open the HTML page in your browser
+#### Launch in local the API Rest server and Open the HTML page in your browser
 `index.html`
 
 ### EXAMPLES
 
 ![Example 1](./example_1.png)
 
-## DEPENDENCIES
-
-- 
-- 
--
 
 ![Html](https://img.shields.io/badge/html-5-blue.svg)
 ![Css](https://img.shields.io/badge/css-3-blue.svg)

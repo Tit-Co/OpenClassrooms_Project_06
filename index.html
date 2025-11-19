@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OC Movies</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,278 +15,288 @@
 </head>
 <body>
     <header>
-        <div class="banner">
-            <img src="./assets/images/logo.png" alt="Logo JustStreamIt" title="Logo Just Stream It">
-            <h3 class="bannerTitle">Vidéos à la demande</h3>
+        <div class="container">
+            <div class="banner">
+                <img src="./assets/images/logo.png" alt="Logo JustStreamIt" title="Logo Just Stream It">
+                <h3 class="bannerTitle">Vidéos à la demande</h3>
+            </div>
         </div>
     </header>
     <main>
-        <section id="bestMovieSection">
-            <h1>Meilleur film</h1>
-            <div class="bestMovieContent" id="bestMovieContent">
-                <img src="https://picsum.photos/200/300" alt="Meilleur film - image" title="Meilleur film - image">
-                <div>
-                    <h2>Meilleur Film - titre</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </div>
-            </div>
-            <div class="bestMovieDetails">
-                <a id="bestMovieDetails" href="">Détails</a>
-            </div>
-        </section>
-        <section id="bestMoviesSection">
-            <h1>Films les mieux notés</h1>
-            <div class="moviesContent">
-                <div class="moviesImageBlock">
-                    <img id="bestMoviesMoviesImage1" src="https://picsum.photos/250" alt="Meilleurs films - image 1" title="Meilleurs films - image 1">
-                    <div>
-                        <p>Title 1</p>
-                        <a>Détails</a>
+        <div class="container">
+            <section id="bestMovieSection">
+                <h1>Meilleur film</h1>
+                <div class="bestMovieContent" id="bestMovieContent">
+                    <div class="crop">
+                        <img src="https://picsum.photos/200/300" alt="Meilleur film - image" title="Meilleur film - image">
+                    </div>
+                    <div class="infos">
+                        <h2>Meilleur Film - titre</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <div class="bestMovieDetails">
+                            <a id="bestMovieDetails" href="#">Détails</a>
+                        </div>
                     </div>
                 </div>
-                <div class="moviesImageBlock">
-                    <img id="bestMoviesMoviesImage2" src="https://picsum.photos/250" alt="Meilleurs films - image 2" title="Meilleurs films - image 2">
-                    <div>
-                        <p>Title 2</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="bestMoviesMoviesImage3" src="https://picsum.photos/250" alt="Meilleurs films - image 3" title="Meilleurs films - image 3">
-                    <div>
-                        <p>Title 3</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="bestMoviesMoviesImage4" src="https://picsum.photos/250" alt="Meilleurs films - image 4" title="Meilleurs films - image 4">
-                    <div>
-                        <p>Title 4</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="bestMoviesMoviesImage5" src="https://picsum.photos/250" alt="Meilleurs films - image 5" title="Meilleurs films - image 5">
-                    <div>
-                        <p>Title 5</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="bestMoviesMoviesImage6" src="https://picsum.photos/250" alt="Meilleurs films - image 6" title="Meilleurs films - image 6">
-                    <div>
-                        <p>Title 6</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <a href="">Voir plus</a>
-            </div>
-        </section>
-        <section id="category1Section">
-            <h1>Catégorie 1</h1>
-            <div class="moviesContent">
-                <div class="moviesImageBlock">
-                    <img id="category1MoviesImage1" src="https://picsum.photos/250" alt="Catégorie 1 - image 1" title="Catégorie 1 - image 1">
-                    <div>
-                        <p>Title 1</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="category1MoviesImage2" src="https://picsum.photos/250" alt="Catégorie 1 - image 2" title="Catégorie 1 - image 2">
-                    <div>
-                        <p>Title 2</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="category1MoviesImage3" src="https://picsum.photos/250" alt="Catégorie 1 - image 3" title="Catégorie 1 - image 3">
-                    <div>
-                        <p>Title 3</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="category1MoviesImage4" src="https://picsum.photos/250" alt="Catégorie 1 - image 4" title="Catégorie 1 - image 4">
-                    <div>
-                        <p>Title 4</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="category1MoviesImage5" src="https://picsum.photos/250" alt="Catégorie 1 - image 5" title="Catégorie 1 - image 5">
-                    <div>
-                        <p>Title 5</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="category1MoviesImage6" src="https://picsum.photos/250" alt="Catégorie 1 - image 6" title="Catégorie 1 - image 6">
-                    <div>
-                        <p>Title 6</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <a href="">Voir plus</a>
-            </div>
-        </section>
-        <section id="category2Section">
-            <h1>Catégorie 2</h1>
-            <div class="moviesContent">
-                <div class="moviesImageBlock">
-                    <img id="category2MoviesImage1" src="https://picsum.photos/250" alt="Catégorie 2 - image 1" title="Catégorie 2 - image 1">
-                    <div>
-                        <p>Title 1</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="category2MoviesImage2" src="https://picsum.photos/250" alt="Catégorie 2 - image 2" title="Catégorie 2 - image 2">
-                    <div>
-                        <p>Title 2</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="category2MoviesImage3" src="https://picsum.photos/250" alt="Catégorie 2 - image 3" title="Catégorie 2 - image 3">
-                    <div>
-                        <p>Title 3</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="category2MoviesImage4" src="https://picsum.photos/250" alt="Catégorie 2 - image 4" title="Catégorie 2 - image 4">
-                    <div>
-                        <p>Title 4</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="category2MoviesImage5" src="https://picsum.photos/250" alt="Catégorie 2 - image 5" title="Catégorie 2 - image 5">
-                    <div>
-                        <p>Title 5</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="category2MoviesImage6" src="https://picsum.photos/250" alt="Catégorie 2 - image 6" title="Catégorie 2 - image 6">
-                    <div>
-                        <p>Title 6</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <a href="">Voir plus</a>
-            </div>
-        </section>
-        <section id="othersCategorySection">
-            <div class="othersCategoryTitle" id="othersCategoryTitle">
-                <h1>Autres:</h1>
-                <select name="othersCategoryList" id="othersCategorySelect">
-                    <option value="action" selected>Films d'action</option>
-                </select>
-            </div>
-            <div class="moviesContent">
-                <div class="moviesImageBlock">
-                    <img id="othersCategoryMoviesImage1" src="https://picsum.photos/250" alt="Catégorie autres - image 1" title="Catégorie autres - image 1">
-                    <div>
-                        <p>Title 1</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="othersCategoryMoviesImage2" src="https://picsum.photos/250" alt="Catégorie autres - image 2" title="Catégorie autres - image 2">
-                    <div>
-                        <p>Title 2</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="othersCategoryMoviesImage3" src="https://picsum.photos/250" alt="Catégorie autres - image 3" title="Catégorie autres - image 3">
-                    <div>
-                        <p>Title 3</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="othersCategoryMoviesImage4" src="https://picsum.photos/250" alt="Catégorie autres - image 4" title="Catégorie autres - image 4">
-                    <div>
-                        <p>Title 4</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="othersCategoryMoviesImage5" src="https://picsum.photos/250" alt="Catégorie autres - image 5" title="Catégorie autres - image 5">
-                    <div>
-                        <p>Title 5</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <div class="moviesImageBlock">
-                    <img id="othersCategoryMoviesImage6" src="https://picsum.photos/250" alt="Catégorie autres - image 6" title="Catégorie autres - image 6">
-                    <div>
-                        <p>Title 6</p>
-                        <a>Détails</a>
-                    </div>
-                </div>
-                <a href="">Voir plus</a>
-            </div>
-        </section>
-        <div class="modal" id="modal">
-          <div class="modalContent" id="modalContent">
-              <table>
-                  <tr>
-                      <td><h1>The Big Lebowski</h1></td>
-                      <td rowspan="6">
-                          <div>
-                            <img src="https://picsum.photos/227/334" alt="Modal desktop - Image Film">
-                          </div>
-                      </td>
-                      <td>
-                          <div class="close">
-                            <a href="#" id="closeCross"><span>&times;</span></a>
-                          </div>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td class="subtitle">1998 - Comedy, Crime, Sport</td>
-                      <td></td>
-                  </tr>
-                  <tr>
-                      <td class="subtitle">PG-13 - 117 minutes (USA / UK)</td>
-                      <td></td>
-                  </tr>
-                  <tr>
-                      <td class="subtitle">IMDB score: 8.1/10</td>
-                      <td></td>
-                  </tr>
-                  <tr>
-                      <td class="subtitle">Recettes au box-office: $48.2m</td>
-                      <td></td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <p class="directed-by">Réalisé par:</p>
-                          <p class="directors">Joel Cohen, Ethan Cohen</p>
-                      </td>
-                      <td></td>
-                  </tr>
 
-              </table>
-              <div>
-                  <p class="description">When "the dude" Lebowski is mistaken for a millionaire Lebowski, two thugs urinate on his rug to coerce him into paying a debt he knows nothing about. While attempting to gain recompense for the ruined rug from his wealthy counterpart, he accepts a one-time job with high pay-off. He enlists the help of his bowling buddy, Walter, a gun-toting Jewish-convert with anger issues. Deception leads to more trouble, and it soon seems that everyone from porn empire tycoons to nihilists want something from The Dude.</p>
-              </div>
-              <div class="tablet-mobile-image">
-                  <img src="https://picsum.photos/409/602" alt="Modal mobile - Image Film">
-              </div>
-              <div>
-                  <p class="with">Avec:</p>
-                  <p class="actors">David Huddleston, Flea, Jack Kehler, Jeff Bridges, Jimmie Dale Gilmore, John Goodman, John Turturro, Julianne Moore, Mark Pellegrino, Peter Stormare, Philip Moon, Philip Seymour Hoffman, Steve Buscemi, Tara Reid, Torsten Voges</p>
-              </div>
-              <div class="closeButton">
-                  <a href="#" id="closeButton">Fermer</a>
-              </div>
+            </section>
+            <section id="bestMoviesSection">
+                <h1>Films les mieux notés</h1>
+                <div class="moviesContent">
+                    <div class="moviesImageBlock">
+                        <img id="bestMoviesMoviesImage1" src="https://picsum.photos/250" alt="Meilleurs films - image 1" title="Meilleurs films - image 1">
+                        <div>
+                            <p>Title 1</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="bestMoviesMoviesImage2" src="https://picsum.photos/250" alt="Meilleurs films - image 2" title="Meilleurs films - image 2">
+                        <div>
+                            <p>Title 2</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="bestMoviesMoviesImage3" src="https://picsum.photos/250" alt="Meilleurs films - image 3" title="Meilleurs films - image 3">
+                        <div>
+                            <p>Title 3</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="bestMoviesMoviesImage4" src="https://picsum.photos/250" alt="Meilleurs films - image 4" title="Meilleurs films - image 4">
+                        <div>
+                            <p>Title 4</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="bestMoviesMoviesImage5" src="https://picsum.photos/250" alt="Meilleurs films - image 5" title="Meilleurs films - image 5">
+                        <div>
+                            <p>Title 5</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="bestMoviesMoviesImage6" src="https://picsum.photos/250" alt="Meilleurs films - image 6" title="Meilleurs films - image 6">
+                        <div>
+                            <p>Title 6</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <a href="">Voir plus</a>
+                    <a href="">Voir moins</a>
+                </div>
+            </section>
+            <section id="category1Section">
+                <h1>Catégorie 1</h1>
+                <div class="moviesContent">
+                    <div class="moviesImageBlock">
+                        <img id="category1MoviesImage1" src="https://picsum.photos/250" alt="Catégorie 1 - image 1" title="Catégorie 1 - image 1">
+                        <div>
+                            <p>Title 1</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="category1MoviesImage2" src="https://picsum.photos/250" alt="Catégorie 1 - image 2" title="Catégorie 1 - image 2">
+                        <div>
+                            <p>Title 2</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="category1MoviesImage3" src="https://picsum.photos/250" alt="Catégorie 1 - image 3" title="Catégorie 1 - image 3">
+                        <div>
+                            <p>Title 3</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="category1MoviesImage4" src="https://picsum.photos/250" alt="Catégorie 1 - image 4" title="Catégorie 1 - image 4">
+                        <div>
+                            <p>Title 4</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="category1MoviesImage5" src="https://picsum.photos/250" alt="Catégorie 1 - image 5" title="Catégorie 1 - image 5">
+                        <div>
+                            <p>Title 5</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="category1MoviesImage6" src="https://picsum.photos/250" alt="Catégorie 1 - image 6" title="Catégorie 1 - image 6">
+                        <div>
+                            <p>Title 6</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <a href="">Voir plus</a>
+                    <a href="">Voir moins</a>
+                </div>
+            </section>
+            <section id="category2Section">
+                <h1>Catégorie 2</h1>
+                <div class="moviesContent">
+                    <div class="moviesImageBlock">
+                        <img id="category2MoviesImage1" src="https://picsum.photos/250" alt="Catégorie 2 - image 1" title="Catégorie 2 - image 1">
+                        <div>
+                            <p>Title 1</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="category2MoviesImage2" src="https://picsum.photos/250" alt="Catégorie 2 - image 2" title="Catégorie 2 - image 2">
+                        <div>
+                            <p>Title 2</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="category2MoviesImage3" src="https://picsum.photos/250" alt="Catégorie 2 - image 3" title="Catégorie 2 - image 3">
+                        <div>
+                            <p>Title 3</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="category2MoviesImage4" src="https://picsum.photos/250" alt="Catégorie 2 - image 4" title="Catégorie 2 - image 4">
+                        <div>
+                            <p>Title 4</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="category2MoviesImage5" src="https://picsum.photos/250" alt="Catégorie 2 - image 5" title="Catégorie 2 - image 5">
+                        <div>
+                            <p>Title 5</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="category2MoviesImage6" src="https://picsum.photos/250" alt="Catégorie 2 - image 6" title="Catégorie 2 - image 6">
+                        <div>
+                            <p>Title 6</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <a href="">Voir plus</a>
+                    <a href="">Voir moins</a>
+                </div>
+            </section>
+            <section id="othersCategorySection">
+                <div class="othersCategoryTitle" id="othersCategoryTitle">
+                    <h1>Autres:</h1>
+                    <select name="othersCategoryList" id="othersCategorySelect">
+                        <option value="action" selected>Films d'action</option>
+                    </select>
+                </div>
+                <div class="moviesContent">
+                    <div class="moviesImageBlock">
+                        <img id="othersCategoryMoviesImage1" src="https://picsum.photos/250" alt="Catégorie autres - image 1" title="Catégorie autres - image 1">
+                        <div>
+                            <p>Title 1</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="othersCategoryMoviesImage2" src="https://picsum.photos/250" alt="Catégorie autres - image 2" title="Catégorie autres - image 2">
+                        <div>
+                            <p>Title 2</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="othersCategoryMoviesImage3" src="https://picsum.photos/250" alt="Catégorie autres - image 3" title="Catégorie autres - image 3">
+                        <div>
+                            <p>Title 3</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="othersCategoryMoviesImage4" src="https://picsum.photos/250" alt="Catégorie autres - image 4" title="Catégorie autres - image 4">
+                        <div>
+                            <p>Title 4</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="othersCategoryMoviesImage5" src="https://picsum.photos/250" alt="Catégorie autres - image 5" title="Catégorie autres - image 5">
+                        <div>
+                            <p>Title 5</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <div class="moviesImageBlock">
+                        <img id="othersCategoryMoviesImage6" src="https://picsum.photos/250" alt="Catégorie autres - image 6" title="Catégorie autres - image 6">
+                        <div>
+                            <p>Title 6</p>
+                            <a>Détails</a>
+                        </div>
+                    </div>
+                    <a href="">Voir plus</a>
+                    <a href="">Voir moins</a>
+                </div>
+            </section>
+            <div class="modal" id="modal">
+              <div class="modalContent" id="modalContent">
+                  <table>
+                      <tr>
+                          <td><h1>The Big Lebowski</h1></td>
+                          <td rowspan="6">
+                              <div class="desktopImage">
+                                <img src="https://picsum.photos/227/334" alt="Modal desktop - Image Film">
+                              </div>
+                          </td>
+                          <td>
+                              <div class="close">
+                                <a href="#" id="closeCross"><span>&times;</span></a>
+                              </div>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td class="subtitle">1998 - Comedy, Crime, Sport</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td class="subtitle">PG-13 - 117 minutes (USA / UK)</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td class="subtitle">IMDB score: 8.1/10</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td class="subtitle">Recettes au box-office: $48.2m</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <p class="directed-by">Réalisé par:</p>
+                              <p class="directors">Joel Cohen, Ethan Cohen</p>
+                          </td>
+                          <td></td>
+                      </tr>
 
-          </div>
+                  </table>
+                  <div>
+                      <p class="description">When "the dude" Lebowski is mistaken for a millionaire Lebowski, two thugs urinate on his rug to coerce him into paying a debt he knows nothing about. While attempting to gain recompense for the ruined rug from his wealthy counterpart, he accepts a one-time job with high pay-off. He enlists the help of his bowling buddy, Walter, a gun-toting Jewish-convert with anger issues. Deception leads to more trouble, and it soon seems that everyone from porn empire tycoons to nihilists want something from The Dude.</p>
+                  </div>
+                  <div class="tablet-mobile-image">
+                      <img src="https://picsum.photos/409/602" alt="Modal mobile - Image Film">
+                  </div>
+                  <div>
+                      <p class="with">Avec:</p>
+                      <p class="actors">David Huddleston, Flea, Jack Kehler, Jeff Bridges, Jimmie Dale Gilmore, John Goodman, John Turturro, Julianne Moore, Mark Pellegrino, Peter Stormare, Philip Moon, Philip Seymour Hoffman, Steve Buscemi, Tara Reid, Torsten Voges</p>
+                  </div>
+                  <div class="closeButton">
+                      <a href="#" id="closeButton">Fermer</a>
+                  </div>
+              </div>
+            </div>
         </div>
     </main>
     <footer>

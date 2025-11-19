@@ -1,5 +1,5 @@
-function createMovie(movieId, title, genres, year, releaseDate, rating, imdbScore, directors, actors, writers, duration,
-                     countries, boxOffice, url, imdbUrl, votes, imageUrl, description){
+function createMovie(movieId, title, genres, year, releaseDate, rating, imdbScore, directors, actors, writers,
+                     duration, countries, boxOffice, url, imdbUrl, votes, imageUrl, description){
     return movie = {
     movieId: movieId,
     title: title,
@@ -50,6 +50,35 @@ function getMovieObject(movieDict){
     const description = movieDict["long_description"]
     return createMovie(movieId, title, genres, year, releaseDate, rating, imdbScore, directors, actors, writers,
         duration, countries, boxOffice, url, imdbUrl, votes, imageUrl, description)
+}
+
+function computeRating(rating) {
+  const UNRATED = new Set(["Not rated or unkown rating", "PG", "R", "", null, undefined]);
+
+  if (typeof rating === "string") {
+    const trimmed = rating.trim();
+
+    if (UNRATED.has(trimmed) || UNRATED.has(trimmed.toUpperCase())) {
+      return "PG-Non évalué";
+    }
+
+    const m = trimmed.match(/(\d{1,3})/);
+    if (m) {
+      const n = Number(m[1]);
+      if (Number.isInteger(n)) return `PG-${n}`;
+    }
+
+    const asNum = Number(trimmed);
+    if (Number.isInteger(asNum)) return `PG-${asNum}`;
+
+    return "PG-Non évalué";
+  }
+
+  if (typeof rating === "number" && Number.isInteger(rating)) {
+    return `PG-${rating}`;
+  }
+
+  return "PG-Non évalué";
 }
 
 function computeCategory(category) {
@@ -109,8 +138,8 @@ function computeCategory(category) {
         case "Reality-tv" :
             cat = "Télé Réalité";
             break;
-        case "Sci-fi" :
-            cat = "Science-fiction";
+        case "Sci-Fi" :
+            cat = "Science-Fiction";
             break;
         case "War" :
             cat = "Films de guerre";
@@ -188,4 +217,3 @@ async function getAllCategories() {
     const categoryList = await getGenres()
     return getCategoryObjects(categoryList)
 }
-

@@ -1,38 +1,88 @@
-function createImage(format, movie, target) {
-    const img = document.createElement("img");
+// function createImage(movie, target) {
+//     const img = document.createElement("img");
+//     img.src = movie.imageUrl;
+//     img.alt = `${movie.title} - image ${target}`;
+//     img.title = `${movie.title} - image ${target}`;
+//
+//     const imgUrl = "./assets/images/placeholder_2.png";
+//
+//     img.onerror = () => {
+//         console.log(`IMG Loading Error : ${movie.imageUrl} replaced by ${imgUrl}`)
+//         img.src = imgUrl;
+//     };
+//
+//     return img;
+// }
 
-    img.src = movie.imageUrl;
-    img.alt = `${movie.title} - image ${target}`;
-    img.title = `${movie.title} - image ${target}`;
-    let imgUrl = "";
-    switch(format) {
-        case "square" :
-            imgUrl = "./assets/images/placeholder_square.png";
-            break;
-        case "portrait" :
-            imgUrl = "./assets/images/placeholder.png";
-            break;
+const imageCache = new Map();
+
+function preloadImage(url) {
+  return new Promise((resolve, reject) => {
+    if (!url) return reject(new Error("No url"));
+
+    const cached = imageCache.get(url);
+    if (cached) {
+      return cached.ok ? resolve(true) : reject(new Error("caching error"));
     }
+
+    const img = new Image();
+
+    img.onload = () => {
+
+      img.onload = img.onerror = null;
+      imageCache.set(url, { ok: true });
+      resolve(true);
+    };
     img.onerror = () => {
-        console.log(`IMG Loading Error : ${movie.imageUrl} replaced by ${imgUrl}`)
-        img.src = imgUrl;
+
+      img.onload = img.onerror = null;
+      imageCache.set(url, { ok: false });
+      reject(new Error("loading error"));
     };
 
-    return img;
+    img.src = url;
+  });
 }
 
-function loadMoviesContentSection(movies) {
+async function createImage(movie, target) {
+  const placeholderUrl = "./assets/images/placeholder.png";
+  const img = document.createElement("img");
+  img.alt = `${movie.title} - image ${target}`;
+  img.title = `${movie.title} - image ${target}`;
+
+  const url = movie && movie.imageUrl ? movie.imageUrl : null;
+
+  try {
+    if (url) {
+      await preloadImage(url);
+      img.src = url;
+    } else {
+      img.src = placeholderUrl;
+    }
+  } catch (err) {
+    img.src = placeholderUrl;
+  }
+
+  img.onerror = () => {
+    img.onerror = null;
+    img.src = placeholderUrl;
+  };
+
+  return img;
+}
+
+async function loadMoviesContentSection(movies) {
     const movieContentDiv = document.createElement("div")
     movieContentDiv.classList.add("moviesContent");
 
-    let i = 0;
+    let i = 1;
     for(const movie of movies) {
         const imageBlockDiv = document.createElement("div");
 
-        const img = createImage("square", movie, "");
+        const img = await createImage(movie, "");
         img.style.objectFit = "cover";
         img.style.width = "250px";
-        imageBlockDiv.classList.add("moviesImageBlock");
+        imageBlockDiv.classList.add("moviesImageBlock" + i.toString());
         imageBlockDiv.appendChild(img);
 
         const buttonId = "bestMoviesDetailsButton" + i.toString();
@@ -42,12 +92,12 @@ function loadMoviesContentSection(movies) {
         detailsButton.href = "#";
 
         // Details Modal
-        detailsButton.addEventListener("click", (event) => {
+        detailsButton.addEventListener("click", async (event) => {
             event.preventDefault();
             const myModalContent = document.getElementById("modalContent");
             myModalContent.innerHTML = "";
 
-            const divContent = loadInModal(movie) ;
+            const divContent = await loadInModal(movie);
             myModalContent.appendChild(divContent);
 
             registerModalEvents();
@@ -62,15 +112,20 @@ function loadMoviesContentSection(movies) {
         i++;
     }
 
-    const a = document.createElement("a")
-    a.href = "#";
-    a.innerText = "Voir plus";
-    movieContentDiv.appendChild(a)
+    const aSeeMore = document.createElement("a")
+    aSeeMore.href = "#";
+    aSeeMore.innerText = "Voir plus";
+    movieContentDiv.appendChild(aSeeMore)
+
+    const aSeeLess = document.createElement("a")
+    aSeeLess.href = "#";
+    aSeeLess.innerText = "Voir moins";
+    movieContentDiv.appendChild(aSeeLess)
 
     return movieContentDiv;
 }
 
-function loadMoviesSection(section, category, moviesList) {
+async function loadMoviesSection(section, category, moviesList) {
     const moviesSection = document.getElementById(section);
     moviesSection.innerHTML = "";
 
@@ -78,7 +133,7 @@ function loadMoviesSection(section, category, moviesList) {
     title.innerText = computeCategory(category);
     moviesSection.appendChild(title);
 
-    const movieContentDiv = loadMoviesContentSection(moviesList);
+    const movieContentDiv = await loadMoviesContentSection(moviesList);
 
     moviesSection.appendChild(movieContentDiv);
 }
@@ -99,7 +154,7 @@ function registerModalEvents() {
     });
 }
 
-function loadInModal(movie) {
+async function loadInModal(movie) {
     const div = document.createElement("div");
 
     const table = document.createElement("table");
@@ -111,10 +166,11 @@ function loadInModal(movie) {
     tr1.appendChild(td1);
 
     const td2 = document.createElement("td");
-    td2.rowSpan = "6";
+    td2.rowSpan = 6;
     const td2Div = document.createElement("div");
+    td2Div.classList.add("desktopImage");
 
-    const img = createImage("portrait", movie, "Desktop");
+    const img = await createImage(movie, "Desktop");
     img.style.width = "227px";
     img.style.height = "334px";
     td2Div.appendChild(img);
@@ -141,12 +197,8 @@ function loadInModal(movie) {
 
     const tr3 = document.createElement("tr");
     const allMovieCountries = movie.countries.join("/ ");
-    let rating = ""
-    if(Number.isInteger(movie.rating)) {
-        rating = "PG-" + movie.rating
-    }else{
-        rating = "PG- Non évalué"
-    }
+    const rating = computeRating(movie.rating);
+
     tr3.innerHTML = `
         <td class="subtitle">${rating} - ${movie.duration} minutes (${allMovieCountries})</td>
         <td></td>
@@ -161,7 +213,7 @@ function loadInModal(movie) {
     table.appendChild(tr4);
 
     const tr5 = document.createElement("tr");
-    const amount = movie.boxOffice ? new Intl.NumberFormat("en",
+    const amount = movie.boxOffice ? new Intl.NumberFormat("fr",
         {
             notation: "compact",
             compactDisplay: "short",
@@ -197,7 +249,7 @@ function loadInModal(movie) {
     const imgDiv = document.createElement("div");
     imgDiv.classList.add("tablet-mobile-image");
 
-    const imageMobile = createImage("portrait", movie, "mobile");
+    const imageMobile = await createImage(movie, "mobile");
     imgDiv.appendChild(imageMobile);
 
     div.appendChild(imgDiv);
@@ -220,37 +272,51 @@ function loadInModal(movie) {
     return div
 }
 
-function renderMoviesSection(section, category, movies) {
-    loadMoviesSection(section, category, movies);
+async function renderMoviesSection(section, category, movies) {
+    await loadMoviesSection(section, category, movies);
 }
 
-function renderBestMovie(bestMovie) {
+async function renderBestMovie(bestMovie) {
     const divBestMovieContent = document.getElementById("bestMovieContent");
     divBestMovieContent.innerHTML = "";
 
-    const img = createImage("portrait", bestMovie, "")
+    const cropDiv = document.createElement("div");
+    cropDiv.classList.add("crop")
+
+    const img = await createImage(bestMovie, "")
+
+    cropDiv.appendChild(img)
 
     const divInfo = document.createElement("div");
+    divInfo.classList.add("infos");
     divInfo.innerHTML = `
         <h2>${bestMovie.title}</h2>
         <p>${bestMovie.description}</p>
     `;
 
-    divBestMovieContent.appendChild(img);
-    divBestMovieContent.appendChild(divInfo);
+    divBestMovieContent.appendChild(cropDiv);
 
+
+    const detailsDiv = document.createElement("div");
     // Details Modal
-    let detailsButton = document.getElementById("bestMovieDetails")
-    detailsButton.addEventListener("click", (event) => {
+    detailsDiv.classList.add("bestMovieDetails");
+    let detailsButtonA = document.createElement("a");
+    detailsButtonA.id = "bestMovieDetails";
+    detailsButtonA.innerText = "Details"
+    detailsButtonA.addEventListener("click", async (event) => {
         event.preventDefault();
         const myModalContent = document.getElementById("modalContent");
         myModalContent.innerHTML = "";
 
-        const divContent = loadInModal(bestMovie) ;
+        const divContent = await loadInModal(bestMovie);
         myModalContent.appendChild(divContent);
 
         registerModalEvents();
     });
+    detailsDiv.appendChild(detailsButtonA);
+    divInfo.appendChild(detailsDiv);
+    divBestMovieContent.appendChild(divInfo);
+
 }
 
 async function renderOthersCategorySection(categories) {
@@ -266,7 +332,7 @@ async function renderOthersCategorySection(categories) {
 
     const selectComponent = document.createElement("select");
     selectComponent.name="othersCategoryList";
-    selectComponent.id="othersCategoryTitle";
+    selectComponent.id="othersCategoryList";
 
     for(const category of categories) {
         const optionElement = document.createElement("option");
@@ -277,17 +343,25 @@ async function renderOthersCategorySection(categories) {
         }
         selectComponent.appendChild(optionElement);
 
-        optionElement.addEventListener("click", async(event) => {
-            event.preventDefault();
-            const moviesFromNewCategory = await getBestMoviesFromCategory(category.name);
-            const newMovieContentDiv = loadMoviesContentSection(moviesFromNewCategory);
-            section.childNodes[1].replaceWith(newMovieContentDiv);
-        });
+        selectComponent.addEventListener("change", async (event) => {
+        event.preventDefault();
+        const selectedCategory = event.target.value;
+        const moviesFromNewCategory = await getBestMoviesFromCategory(selectedCategory);
+        const movieContentDiv = section.querySelector(".moviesContent");
+
+        if (movieContentDiv) {
+            const updatedMoviesDiv = await loadMoviesContentSection(moviesFromNewCategory);
+            movieContentDiv.innerHTML="";
+            movieContentDiv.append(...updatedMoviesDiv.childNodes);
+        } else {
+            section.appendChild(await loadMoviesContentSection(moviesFromNewCategory));
+        }
+    });
 
     }
     headerDiv.appendChild(selectComponent);
     section.appendChild(headerDiv);
     const moviesFromCategory = await getBestMoviesFromCategory("Action");
-    const movieContentDiv = loadMoviesContentSection(moviesFromCategory);
+    const movieContentDiv = await loadMoviesContentSection(moviesFromCategory);
     section.appendChild(movieContentDiv);
 }

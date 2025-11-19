@@ -4,17 +4,17 @@ async function loadOthersCategories(categories) {
 
 async function loadBestMovie() {
     const bestMovie = await getBestMovie();
-    renderBestMovie(bestMovie);
+    await renderBestMovie(bestMovie);
 }
 
 async function loadBestMoviesFromAllGenres() {
     const bestMoviesFromAllGenres = await getBestMoviesFromAllGenres();
-    renderMoviesSection("bestMoviesSection", "Films les mieux notés", bestMoviesFromAllGenres);
+    await renderMoviesSection("bestMoviesSection", "Films les mieux notés", bestMoviesFromAllGenres);
 }
 
 async function loadMoviesFromCategory(section, category) {
     const moviesFromCategory = await getBestMoviesFromCategory(category);
-    renderMoviesSection(section + "Section", category, moviesFromCategory);
+    await renderMoviesSection(section + "Section", category, moviesFromCategory);
 }
 
 async function loadAllOthersCategories() {
@@ -26,8 +26,8 @@ async function loadHomePage() {
     await Promise.all([
         loadBestMovie(),
         loadBestMoviesFromAllGenres(),
-        loadMoviesFromCategory("category1", "Thriller"),
-        loadMoviesFromCategory("category2", "Animation"),
+        loadMoviesFromCategory("category1", "Adventure"),
+        loadMoviesFromCategory("category2", "Sci-Fi"),
         loadAllOthersCategories()
     ]);
 }
