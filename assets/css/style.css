@@ -146,6 +146,7 @@ h1 {
     text-align: center;
     line-height: 24px;
     border-radius: 25px;
+    vertical-align: middle;
 }
 
 .moviesContent{
@@ -226,7 +227,7 @@ h1 {
     text-align: center;
     margin-left: 235px;
     margin-top: -60px;
-    padding: 3px 0 7px 0;
+    padding: 3px 0 25px 0;
 }
 
 .moviesImageBlock1 img,
@@ -261,7 +262,7 @@ h1 {
 .moviesContent a{
     display: inline-block;
     width: 214px;
-    height: 36px;
+    height: 25px;
     border-radius: 25px;
     background: #FA0B0B;
     color: #FFFFFF;
@@ -269,7 +270,7 @@ h1 {
     font-size: 20px;
     text-align: center;
     vertical-align: middle;
-    padding-top: 10px;
+    padding: 5px 0 28px 0;
     text-decoration: none;
 }
 
@@ -844,7 +845,7 @@ h1 {
         vertical-align: middle;
         margin-left: 155px;
         margin-top: -60px;
-        padding: 3px 0 7px 0;
+        padding: 3px 0 25px 0;
     }
 
     .moviesImageBlock1 div p,
