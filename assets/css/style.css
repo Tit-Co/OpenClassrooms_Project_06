@@ -10,6 +10,11 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: auto !important;
+  overflow-y: auto !important;
+}
+
 body {
     visibility: hidden;
     margin: auto;
@@ -17,6 +22,7 @@ body {
     font-style: normal;
     letter-spacing: 0;
     line-height: 130%;
+    font-weight: 300;
 }
 
 .container {
@@ -59,6 +65,7 @@ h1 {
 .banner h3{
     display: none;
     font-weight: 300;
+    font-style: normal;
     font-size: 40px;
     color: #FFFFFF;
     margin: 0 40px;
@@ -136,8 +143,10 @@ h1 {
     width: 91px;
     height: 40px;
     margin: 0;
-    padding: 8px 28px;
-    display: block;
+    /*padding: 8px 28px;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-decoration: none;
     background: #FA0B0B;
     color: #FFFFFF;
@@ -149,7 +158,7 @@ h1 {
     vertical-align: middle;
 }
 
-.moviesContent{
+.bestMoviesContent, .cat1MoviesContent, .cat2MoviesContent, .othersMoviesContent {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -161,25 +170,20 @@ h1 {
     max-width: 100%;
 }
 
-.moviesImageBlock1,
-.moviesImageBlock2,
-.moviesImageBlock3,
-.moviesImageBlock4,
-.moviesImageBlock5,
-.moviesImageBlock6 {
+.moviesImageBlock {
     width: 329px;
     height: 319px;
     overflow: hidden;
     justify-content: center;
     position: relative;
+    display: block;
 }
 
-.moviesImageBlock1 div,
-.moviesImageBlock2 div,
-.moviesImageBlock3 div,
-.moviesImageBlock4 div,
-.moviesImageBlock5 div,
-.moviesImageBlock6 div{
+.moviesImageBlock:nth-child(n+3).hidden {
+    display: none;
+}
+
+.moviesImageBlock div {
     width: 329px;
     height: auto;
     position: relative;
@@ -191,12 +195,7 @@ h1 {
     z-index: 2;
 }
 
-.moviesImageBlock1 div p,
-.moviesImageBlock2 div p,
-.moviesImageBlock3 div p,
-.moviesImageBlock4 div p,
-.moviesImageBlock5 div p,
-.moviesImageBlock6 div p {
+.moviesImageBlock div p {
     display: block;
     background: rgba(0,0,0,0.5);
     min-height: 131px;
@@ -208,16 +207,10 @@ h1 {
     line-height: 130%;
 }
 
-.moviesImageBlock1 div a,
-.moviesImageBlock2 div a,
-.moviesImageBlock3 div a,
-.moviesImageBlock4 div a,
-.moviesImageBlock5 div a,
-.moviesImageBlock6 div a {
-    display: inline-block;
+.moviesImageBlock div a {
     position: relative;
-    width: 80px;
-    height: 25px;
+    width: 105px;
+    height: 32px;
     z-index: 4;
     border-radius: 25px;
     background: #2D2C2C;
@@ -225,17 +218,16 @@ h1 {
     font-weight: 500;
     font-size: 14px;
     text-align: center;
-    margin-left: 235px;
-    margin-top: -60px;
-    padding: 3px 0 25px 0;
+    margin-left: 205px;
+    margin-top: -73px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*padding: 3px 0 25px 0;*/
+    text-decoration: none;
 }
 
-.moviesImageBlock1 img,
-.moviesImageBlock2 img,
-.moviesImageBlock3 img,
-.moviesImageBlock4 img,
-.moviesImageBlock5 img,
-.moviesImageBlock6 img {
+.moviesImageBlock img {
     position: absolute;
     min-width: 329px;
     height: auto;
@@ -250,31 +242,30 @@ h1 {
     transition: opacity 0.5s ease-in-out;
 }
 
-.moviesImageBlock1 img[src],
-.moviesImageBlock2 img[src],
-.moviesImageBlock3 img[src],
-.moviesImageBlock4 img[src],
-.moviesImageBlock5 img[src],
-.moviesImageBlock6 img[src] {
+.moviesImageBlock img[src] {
     opacity: 1;
 }
 
-.moviesContent a{
-    display: inline-block;
+.seeMore, .seeLess {
     width: 214px;
-    height: 25px;
+    height: 36px;
     border-radius: 25px;
     background: #FA0B0B;
     color: #FFFFFF;
     font-weight: 500;
     font-size: 20px;
     text-align: center;
-    vertical-align: middle;
-    padding: 5px 0 28px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-decoration: none;
 }
 
-.othersCategoryTitle{
+.seeLess {
+    display: none;
+}
+
+.othersCategoryTitle {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -302,32 +293,37 @@ h1 {
     top: 0;
     width: 412px;
     height: 100%;
-    overflow: scroll;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     background-color: transparent;
 }
 
 .modalContent {
+    max-height: calc(100vh - 100px);
+    overflow-y: auto !important;
     display: block;
     position: relative;
     line-height: 130%;
     background-color: #fefefe;
-    margin: 0 auto;
     border: 6px solid #000000;
     width: 412px;
     padding: 25px;
+    margin: 0 auto;
 }
 
 .modalContent h1{
     text-align: left;
     margin: 0 0 10px 0;
     line-height: 110%;
+    font-weight: 600;
+    font-size: 48px;
 }
 
 .subtitle{
     font-weight: 600;
     font-size: 24px;
-    padding: 8px 0;
-    line-height: 110%;
+    padding: 0;
+    line-height: 120%;
 }
 
 .directed-by{
@@ -343,14 +339,14 @@ h1 {
 }
 
 .description{
-    margin: 40px 20px 40px 0;
-    line-height: 130%;
+    margin: 30px 20px 40px 0;
+    line-height: 150%;
     font-weight: 300;
     font-size: 24px;
 }
 
 .with{
-    margin: 3px 0;
+    margin: 30px 0 0 0;
     font-weight: 400;
     font-size: 20px;
 }
@@ -359,6 +355,7 @@ h1 {
     margin: 0 20px 20px 0;
     font-weight: 300;
     font-size: 20px;
+    line-height: 150%;
 }
 
 .close {
@@ -380,13 +377,6 @@ h1 {
     display: none;
 }
 
-.description{
-    margin: 0 20px 40px 0;
-}
-
-.with{
-    margin: 20px 0;
-}
 
 .desktopImage { display: none; }
 
@@ -497,13 +487,13 @@ h1 {
         position: relative;
         width: 123px;
         height: 49px;
-        padding: 13px 33px;
+        /*padding: 13px 33px;*/
         font-weight: 500;
         font-size: 20px;
         cursor: pointer;
     }
 
-    .moviesContent{
+    .bestMoviesContent, .cat1MoviesContent, .cat2MoviesContent, .othersMoviesContent {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -513,52 +503,39 @@ h1 {
         max-width: 840px;
     }
 
-    .moviesImageBlock1,
-    .moviesImageBlock2,
-    .moviesImageBlock3,
-    .moviesImageBlock4,
-    .moviesImageBlock5,
-    .moviesImageBlock6 {
+    .moviesImageBlock {
         position: relative;
         display: block;
         width: 279px;
         height: 285px;
     }
 
-    .moviesImageBlock1 div,
-    .moviesImageBlock2 div,
-    .moviesImageBlock3 div,
-    .moviesImageBlock4 div,
-    .moviesImageBlock5 div,
-    .moviesImageBlock6 div {
+    .moviesImageBlock:nth-child(n+3).hidden {
+        display: block;
+    }
+
+    .moviesImageBlock:nth-child(n+5).hidden {
+        display: none;
+    }
+
+    .moviesImageBlock div {
         width: 279px;
         height: auto;
     }
 
-    .moviesImageBlock1 div p,
-    .moviesImageBlock2 div p,
-    .moviesImageBlock3 div p,
-    .moviesImageBlock4 div p,
-    .moviesImageBlock5 div p,
-    .moviesImageBlock6 div p {
+    .moviesImageBlock div p {
         min-height: 118px;
     }
 
-    .moviesImageBlock1 div a,
-    .moviesImageBlock2 div a,
-    .moviesImageBlock3 div a,
-    .moviesImageBlock4 div a,
-    .moviesImageBlock5 div a,
-    .moviesImageBlock6 div a {
-        margin-left: 185px;
+    .moviesImageBlock div a {
+        margin-left: 165px;
+        margin-top: -70px;
+        width: 95px;
+        height: 29px;
+
     }
 
-    .moviesImageBlock1 img,
-    .moviesImageBlock2 img,
-    .moviesImageBlock3 img,
-    .moviesImageBlock4 img,
-    .moviesImageBlock5 img,
-    .moviesImageBlock6 img {
+    .moviesImageBlock img {
         position: absolute;
         min-width: 279px;
         height:auto;
@@ -567,10 +544,6 @@ h1 {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-    }
-
-    .moviesContent a{
-        display: inline-block;
     }
 
     .othersCategoryTitle{
@@ -597,9 +570,10 @@ h1 {
     }
 
     .modal {
-        left: 25%;
+        left: 50%;
+        transform: translateX(-50%);
         top: 0;
-        overflow: scroll;
+        position: absolute !important;
         width: 412px;
         height: 100%;
     }
@@ -619,7 +593,7 @@ h1 {
     }
 
     .with{
-        margin: 20px 0;
+        margin: 30px 0 0 0;
     }
 
     .desktopImage {
@@ -757,7 +731,8 @@ h1 {
         color: #FFFFFF;
         font-weight: 500;
         font-size: 24px;
-        vertical-align: middle;
+        justify-content: center;
+        align-items: center;
         margin: 0;
         padding: 22px 50px;
         border-radius: 25px;
@@ -765,26 +740,21 @@ h1 {
         cursor: pointer;
     }
 
-    .moviesContent{
+    .bestMoviesContent, .cat1MoviesContent, .cat2MoviesContent, .othersMoviesContent {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
         gap: 20px;
-        margin-top: 50px;
+        margin-top: 30px;
         z-index: 1;
         max-width: 840px;
     }
 
-    .moviesImageBlock1,
-    .moviesImageBlock2,
-    .moviesImageBlock3,
-    .moviesImageBlock4,
-    .moviesImageBlock5,
-    .moviesImageBlock6 {
+    .moviesImageBlock {
+        display: flex !important;
         position: relative;
-        display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         width: 252px;
@@ -793,12 +763,11 @@ h1 {
         overflow: hidden;
     }
 
-    .moviesImageBlock1 div,
-    .moviesImageBlock2 div,
-    .moviesImageBlock3 div,
-    .moviesImageBlock4 div,
-    .moviesImageBlock5 div,
-    .moviesImageBlock6 div {
+    .moviesImageBlock.hidden {
+        display: block !important;
+    }
+
+    .moviesImageBlock div {
         position: absolute;
         display: flex;
         flex-direction: column;
@@ -806,16 +775,11 @@ h1 {
         margin-top: 10px;
         min-height: 52px;
         z-index: 2;
-        width: 250px;
+        width: 252px;
         height: auto;
     }
 
-    .moviesImageBlock1 img,
-    .moviesImageBlock2 img,
-    .moviesImageBlock3 img,
-    .moviesImageBlock4 img,
-    .moviesImageBlock5 img,
-    .moviesImageBlock6 img {
+    .moviesImageBlock img {
         position: absolute;
         width: auto;
         height: auto;
@@ -825,15 +789,10 @@ h1 {
         object-fit: none;
     }
 
-    .moviesImageBlock1 div a,
-    .moviesImageBlock2 div a,
-    .moviesImageBlock3 div a,
-    .moviesImageBlock4 div a,
-    .moviesImageBlock5 div a,
-    .moviesImageBlock6 div a {
-        display: inline-block;
+    .moviesImageBlock div a {
+        display: flex;
         position: relative;
-        width: 80px;
+        width: 81px;
         height: 25px;
         z-index: 4;
         border-radius: 25px;
@@ -845,15 +804,11 @@ h1 {
         vertical-align: middle;
         margin-left: 155px;
         margin-top: -60px;
-        padding: 3px 0 25px 0;
+        /*padding: 3px 0 25px 0;*/
+        text-decoration: none;
     }
 
-    .moviesImageBlock1 div p,
-    .moviesImageBlock2 div p,
-    .moviesImageBlock3 div p,
-    .moviesImageBlock4 div p,
-    .moviesImageBlock5 div p,
-    .moviesImageBlock6 div p {
+    .moviesImageBlock div p {
         display: block;
         background: rgba(0,0,0,0.5);
         min-height: 102px;
@@ -866,9 +821,8 @@ h1 {
         line-height: 130%;
     }
 
-    .moviesContent a{
-        display: none;
-
+    .seeMore, .seeLess {
+        display: none !important;
     }
 
     .othersCategoryTitle{

@@ -9,12 +9,18 @@ async function loadBestMovie() {
 
 async function loadBestMoviesFromAllGenres() {
     const bestMoviesFromAllGenres = await getBestMoviesFromAllGenres();
-    await renderMoviesSection("bestMoviesSection", "Films les mieux notés", bestMoviesFromAllGenres);
+    await renderMoviesSection("bestMoviesSection", "Films les mieux notés", bestMoviesFromAllGenres, "best");
 }
 
 async function loadMoviesFromCategory(section, category) {
     const moviesFromCategory = await getBestMoviesFromCategory(category);
-    await renderMoviesSection(section + "Section", category, moviesFromCategory);
+    let className = "";
+    if(section === "category1") {
+        className = "cat1";
+    }else {
+        className = "cat2";
+    }
+    await renderMoviesSection(section + "Section", category, moviesFromCategory, className);
 }
 
 async function loadAllOthersCategories() {

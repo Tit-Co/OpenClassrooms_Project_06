@@ -1,19 +1,3 @@
-// function createImage(movie, target) {
-//     const img = document.createElement("img");
-//     img.src = movie.imageUrl;
-//     img.alt = `${movie.title} - image ${target}`;
-//     img.title = `${movie.title} - image ${target}`;
-//
-//     const imgUrl = "./assets/images/placeholder_2.png";
-//
-//     img.onerror = () => {
-//         console.log(`IMG Loading Error : ${movie.imageUrl} replaced by ${imgUrl}`)
-//         img.src = imgUrl;
-//     };
-//
-//     return img;
-// }
-
 const imageCache = new Map();
 
 function preloadImage(url) {
@@ -71,9 +55,50 @@ async function createImage(movie, target) {
   return img;
 }
 
-async function loadMoviesContentSection(movies) {
+function openModal() {
+    document.body.style.overflow = 'hidden';
+    document.getElementById('modal').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function closeModal() {
+    document.body.style.overflow = 'auto';
+    document.getElementById('modal').style.display = 'none';
+}
+
+function showMore(elementId) {
+  const container = document.getElementById(elementId);
+  container.querySelectorAll('.moviesImageBlock').forEach(card => {
+    card.classList.remove('hidden');
+  });
+
+  toggleButtons(elementId, true);
+}
+
+function showLess(elementId) {
+  const container = document.getElementById(elementId);
+  container.querySelectorAll('.moviesImageBlock').forEach((card, index) => {
+    if (index >= 2) card.classList.add('hidden');
+  });
+
+  toggleButtons(elementId, false);
+}
+
+function toggleButtons(elementId, isExpanded) {
+  const container = document.getElementById(elementId);
+
+  const showMoreBtn = container.querySelector(".seeMore");
+  const showLessBtn = container.querySelector(".seeLess");
+
+  showMoreBtn.style.display = isExpanded ? 'none' : 'flex';
+  showLessBtn.style.display = isExpanded ? 'flex' : 'none';
+}
+
+async function loadMoviesContentSection(movies, className) {
     const movieContentDiv = document.createElement("div")
-    movieContentDiv.classList.add("moviesContent");
+    const name = className + "MoviesContent";
+    movieContentDiv.classList.add(name);
+    movieContentDiv.id = name
 
     let i = 1;
     for(const movie of movies) {
@@ -81,8 +106,10 @@ async function loadMoviesContentSection(movies) {
 
         const img = await createImage(movie, "");
         img.style.objectFit = "cover";
-        img.style.width = "250px";
-        imageBlockDiv.classList.add("moviesImageBlock" + i.toString());
+        imageBlockDiv.classList.add("moviesImageBlock");
+        if (i >= 3) {
+            imageBlockDiv.classList.add("hidden");
+        }
         imageBlockDiv.appendChild(img);
 
         const buttonId = "bestMoviesDetailsButton" + i.toString();
@@ -113,19 +140,55 @@ async function loadMoviesContentSection(movies) {
     }
 
     const aSeeMore = document.createElement("a")
-    aSeeMore.href = "#";
+    aSeeMore.href = "#" + className + "MoviesContent";
     aSeeMore.innerText = "Voir plus";
+    aSeeMore.classList.add("seeMore");
+    aSeeMore.id = "SeeMore";
+    aSeeMore.addEventListener("click", () => {
+        switch(className) {
+            case "best" :
+                showMore("bestMoviesContent");
+                break;
+            case "cat1" :
+                showMore("cat1MoviesContent");
+                break;
+            case "cat2" :
+                showMore("cat2MoviesContent");
+                break;
+            case "others" :
+                showMore("othersMoviesContent");
+                break;
+        }
+    });
     movieContentDiv.appendChild(aSeeMore)
 
     const aSeeLess = document.createElement("a")
-    aSeeLess.href = "#";
+    aSeeLess.href = "#" + className + "MoviesContent";
     aSeeLess.innerText = "Voir moins";
+    aSeeLess.classList.add("seeLess");
+    aSeeLess.id = "seeLess";
+    aSeeLess.addEventListener("click", () => {
+        switch(className) {
+            case "best" :
+                showLess("bestMoviesContent");
+                break;
+            case "cat1" :
+                showLess("cat1MoviesContent");
+                break;
+            case "cat2" :
+                showLess("cat2MoviesContent");
+                break;
+            case "others" :
+                showLess("othersMoviesContent");
+                break;
+        }
+    });
     movieContentDiv.appendChild(aSeeLess)
 
     return movieContentDiv;
 }
 
-async function loadMoviesSection(section, category, moviesList) {
+async function loadMoviesSection(section, category, moviesList, className) {
     const moviesSection = document.getElementById(section);
     moviesSection.innerHTML = "";
 
@@ -133,14 +196,14 @@ async function loadMoviesSection(section, category, moviesList) {
     title.innerText = computeCategory(category);
     moviesSection.appendChild(title);
 
-    const movieContentDiv = await loadMoviesContentSection(moviesList);
+    const movieContentDiv = await loadMoviesContentSection(moviesList, className);
 
     moviesSection.appendChild(movieContentDiv);
 }
 
 function registerModalEvents() {
     const modal = document.getElementById("modal");
-    modal.style.display = "block";
+    openModal();
 
     const closeSelectors = ["#closeButton", "#closeCross"];
     closeSelectors.forEach(selector => {
@@ -148,7 +211,7 @@ function registerModalEvents() {
         if (btn) {
             btn.addEventListener("click", event => {
                 event.preventDefault();
-                modal.style.display = "none";
+                closeModal();
             });
         }
     });
@@ -272,8 +335,8 @@ async function loadInModal(movie) {
     return div
 }
 
-async function renderMoviesSection(section, category, movies) {
-    await loadMoviesSection(section, category, movies);
+async function renderMoviesSection(section, category, movies, className) {
+    await loadMoviesSection(section, category, movies, className);
 }
 
 async function renderBestMovie(bestMovie) {
@@ -340,6 +403,7 @@ async function renderOthersCategorySection(categories) {
         optionElement.innerText = computeCategory(category.name);
         if (category.name === "Action") {
             optionElement.selected = true;
+            optionElement.style.fontFamily = "Oswald, sans-serif;";
         }
         selectComponent.appendChild(optionElement);
 
@@ -347,14 +411,14 @@ async function renderOthersCategorySection(categories) {
         event.preventDefault();
         const selectedCategory = event.target.value;
         const moviesFromNewCategory = await getBestMoviesFromCategory(selectedCategory);
-        const movieContentDiv = section.querySelector(".moviesContent");
+        const movieContentDiv = section.querySelector(".othersMoviesContent");
 
         if (movieContentDiv) {
-            const updatedMoviesDiv = await loadMoviesContentSection(moviesFromNewCategory);
+            const updatedMoviesDiv = await loadMoviesContentSection(moviesFromNewCategory, "others");
             movieContentDiv.innerHTML="";
             movieContentDiv.append(...updatedMoviesDiv.childNodes);
         } else {
-            section.appendChild(await loadMoviesContentSection(moviesFromNewCategory));
+            section.appendChild(await loadMoviesContentSection(moviesFromNewCategory, "others"));
         }
     });
 
@@ -362,6 +426,6 @@ async function renderOthersCategorySection(categories) {
     headerDiv.appendChild(selectComponent);
     section.appendChild(headerDiv);
     const moviesFromCategory = await getBestMoviesFromCategory("Action");
-    const movieContentDiv = await loadMoviesContentSection(moviesFromCategory);
+    const movieContentDiv = await loadMoviesContentSection(moviesFromCategory, "others");
     section.appendChild(movieContentDiv);
 }
