@@ -15,8 +15,9 @@ The goal was to develop the front-end interface of a Python web application capa
 ---
 
 ## PROJECT STRUCTURE
-
-![Folders and files structure](./structure.png)
+<p align="center">
+<img src="./structure.png" width="auto" style="border: 1px solid grey; border-radius: 10px;">
+</p>
 
 ---
 
