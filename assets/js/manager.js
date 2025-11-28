@@ -1,7 +1,7 @@
-function createCategory(catId, name){
+function createCategory(categoryDict){
     return category = {
-        catId: catId,
-        name: name
+        catId: categoryDict["id"],
+        name: categoryDict["name"]
     }
 }
 
@@ -105,12 +105,7 @@ function getMovieObjects(movieList) {
 function getCategoryObjects(categoryList) {
     const categories = []
     for(let category of categoryList) {
-        const categoryDict = category
-
-        const catId = categoryDict["id"]
-        const name = categoryDict["name"]
-
-        categories.push(createCategory(catId, name))
+        categories.push(createCategory(category))
     }
     return categories
 }
