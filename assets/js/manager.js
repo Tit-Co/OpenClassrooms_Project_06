@@ -1,27 +1,3 @@
-function createMovie(movieId, title, genres, year, releaseDate, rating, imdbScore, directors, actors, writers,
-                     duration, countries, boxOffice, url, imdbUrl, votes, imageUrl, description){
-    return movie = {
-    movieId: movieId,
-    title: title,
-    genres: genres,
-    year: year,
-    releaseDate: releaseDate,
-    rating: rating,
-    imdbScore: imdbScore,
-    directors: directors,
-    actors: actors,
-    writers: writers,
-    duration: duration,
-    countries: countries,
-    boxOffice: boxOffice,
-    url: url,
-    imdbUrl: imdbUrl,
-    votes: votes,
-    imageUrl: imageUrl,
-    description: description
-    }
-}
-
 function createCategory(catId, name){
     return category = {
         catId: catId,
@@ -30,144 +6,106 @@ function createCategory(catId, name){
 }
 
 function getMovieObject(movieDict){
-    const movieId = movieDict["id"]
-    const title = movieDict["title"]
-    const genres = movieDict["genres"]
-    const year = movieDict["year"]
-    const releaseDate = movieDict["date_published"]
-    const rating = movieDict["rated"]
-    const imdbScore = movieDict["imdb_score"]
-    const directors = movieDict["directors"]
-    const actors = movieDict["actors"]
-    const writers = movieDict["writers"]
-    const duration = movieDict["duration"]
-    const countries = movieDict["countries"]
-    const boxOffice = movieDict["worldwide_gross_income"]
-    const url = movieDict["url"]
-    const imdbUrl = movieDict["imdb_url"]
-    const votes = movieDict["votes"]
-    const imageUrl = movieDict["image_url"]
-    const description = movieDict["long_description"]
-    return createMovie(movieId, title, genres, year, releaseDate, rating, imdbScore, directors, actors, writers,
-        duration, countries, boxOffice, url, imdbUrl, votes, imageUrl, description)
+    return movie = {
+    movieId: movieDict["id"],
+    title: movieDict["title"],
+    genres: movieDict["genres"],
+    year: movieDict["year"],
+    releaseDate: movieDict["date_published"],
+    rating: movieDict["rated"],
+    imdbScore: movieDict["imdb_score"],
+    directors: movieDict["directors"],
+    actors: movieDict["actors"],
+    writers: movieDict["writers"],
+    duration: movieDict["duration"],
+    countries: movieDict["countries"],
+    boxOffice: movieDict["worldwide_gross_income"],
+    url: movieDict["url"],
+    imdbUrl: movieDict["imdb_url"],
+    votes: movieDict["votes"],
+    imageUrl: movieDict["image_url"],
+    description: movieDict["long_description"]
+    }
 }
 
 function computeRating(rating) {
-  const UNRATED = new Set(["Not rated or unkown rating", "PG", "R", "", null, undefined]);
+    const UNRATED = new Set(["Not rated or unkown rating", "PG", "R", "", null, undefined]);
 
-  if (typeof rating === "string") {
-    const trimmed = rating.trim();
-
-    if (UNRATED.has(trimmed) || UNRATED.has(trimmed.toUpperCase())) {
-      return "PG-Non évalué";
+    function extractNumberFromString(str) {
+        const match = str.match(/(\d{1,3})/);
+        return match ? Number(match[1]) : null;
     }
 
-    const m = trimmed.match(/(\d{1,3})/);
-    if (m) {
-      const n = Number(m[1]);
-      if (Number.isInteger(n)) return `PG-${n}`;
+    function toInteger(value) {
+        const num = Number(value);
+        return Number.isInteger(num) ? num : null;
     }
 
-    const asNum = Number(trimmed);
-    if (Number.isInteger(asNum)) return `PG-${asNum}`;
+    if (typeof rating === "string") {
+        const trimmed = rating.trim();
+
+        if (UNRATED.has(trimmed) || UNRATED.has(trimmed.toUpperCase())) {
+          return "PG-Non évalué";
+        }
+
+        const extractedNum = extractNumberFromString(trimmed);
+        if (extractedNum !== null) return `PG-${extractedNum}`;
+
+        const directNum = toInteger(trimmed);
+        if (directNum !== null) return `PG-${directNum}`;
+
+        return "PG-Non évalué";
+
+    } else if (typeof rating === "number" && Number.isInteger(rating)) {
+        return `PG-${rating}`;
+    }
 
     return "PG-Non évalué";
-  }
-
-  if (typeof rating === "number" && Number.isInteger(rating)) {
-    return `PG-${rating}`;
-  }
-
-  return "PG-Non évalué";
 }
 
 function computeCategory(category) {
-    let cat ="";
-    switch(category) {
-        case "Action" :
-            cat = "Films d'action";
-            break;
-        case "Adult" :
-            cat = "Adulte";
-            break;
-        case "Adventure" :
-            cat = "Films d'aventures";
-            break;
-        case "Animation" :
-            cat = "Films d'animation";
-            break;
-        case "Biography" :
-            cat = "Biographies";
-            break;
-        case "Comedy" :
-            cat = "Comedies";
-            break;
-        case "Documentary" :
-            cat = "Documentaires";
-            break;
-        case "Drama" :
-            cat = "Drames";
-            break;
-        case "Family" :
-            cat = "Famille";
-            break;
-        case "Fantasy" :
-            cat = "Films fantastiques";
-            break;
-        case "Film-noir" :
-            cat = "Films Noirs";
-            break;
-        case "History" :
-            cat = "Histoire";
-            break;
-        case "Horror" :
-            cat = "Films d'horreur";
-            break;
-        case "Music" :
-            cat = "Musique";
-            break;
-        case "Musical" :
-            cat = "Comédies musicales";
-            break;
-        case "Mystery" :
-            cat = "Mystères";
-            break;
-        case "News" :
-            cat = "Informations";
-            break;
-        case "Reality-tv" :
-            cat = "Télé Réalité";
-            break;
-        case "Sci-Fi" :
-            cat = "Science-Fiction";
-            break;
-        case "War" :
-            cat = "Films de guerre";
-            break;
-        case "Western" :
-            cat = "Westerns";
-            break;
-        default :
-            cat = category;
-            break;
+   let categoryList = {
+        "Action": "Films d'action",
+        "Adult": "Adulte",
+        "Adventure": "Films d'aventures",
+        "Animation": "Films d'animation",
+        "Biography": "Biographies",
+        "Comedy": "Comedies",
+        "Documentary": "Documentaires",
+        "Drama": "Drames",
+        "Family": "Famille",
+        "Fantasy": "Films fantastiques",
+        "Film-noir": "Films Noirs",
+        "History": "Histoire",
+        "Horror": "Films d'horreur",
+        "Music": "Musique",
+        "Musical": "Comédies musicales",
+        "Mystery": "Mystères",
+        "News": "Informations",
+        "Reality-TV": "Télé Réalité",
+        "Sci-Fi": "Science-Fiction",
+        "War": "Films de guerre",
+        "Western": "Westerns"
     }
-    return cat;
+
+    const cat = categoryList[category];
+
+    return cat ? cat : category;
 }
 
 function getMovieObjects(movieList) {
     let movies = [];
 
-    for(let i=0; i < movieList.length; i++){
-        const movieDict = movieList[i]
-        movies.push(getMovieObject(movieDict))
+    for(let movie of movieList){
+        movies.push(getMovieObject(movie))
     }
     return movies
 }
 
 function getCategoryObjects(categoryList) {
     const categories = []
-    for(let i= 0; i < categoryList.length; i++) {
-        const categoryDict = categoryList[i]
+    for(let category of categoryList) {
+        const categoryDict = category
 
         const catId = categoryDict["id"]
         const name = categoryDict["name"]
@@ -191,9 +129,9 @@ async function getBestMovie(){
 async function computeMovieDetails(movieList){
     let movieDictList= []
 
-    for(let i=0; i < movieList.length; i++){
-        const movieId = movieList[i].id
-        const movieImdbUrl = movieList[i].imdb_url
+    for(let movie of movieList){
+        const movieId = movie.id
+        const movieImdbUrl = movie.imdb_url
         let movieDict = await getMovieDetails(movieId)
         movieDict.imdb_url = movieImdbUrl
         movieDictList.push(movieDict)

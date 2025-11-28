@@ -5,17 +5,11 @@ const genresUrl = baseUrl + "genres/";
 async function getMovies(limit, genre="", sortBy="imdb_score", desc=true) {
     const order = desc ? "-" : "";
 
-    let response = await fetch(`${titlesUrl}?sort_by=${order}${sortBy}&genre=${genre}`);
+    let response = await fetch(`${titlesUrl}?sort_by=${order}${sortBy}&genre=${genre}&page_size=6`);
 
     let data = await response.json();
 
-    let movieList = [...data.results];
-
-    while(data.next && movieList.length < limit){
-        response = await fetch(data.next);
-        data = await response.json();
-        movieList.push(...data.results);
-    }
+    const movieList = [...data.results];
 
     return movieList.slice(0, limit)
 }
@@ -27,15 +21,8 @@ async function getMovieDetails(movieId){
 }
 
 async function getGenres() {
-    let response = await fetch(`${genresUrl}`);
+    let response = await fetch(`${genresUrl}?page_size=25`);
     let data = await response.json();
 
-    let genreList = [...data.results];
-
-    while(data.next){
-        response = await fetch(data.next);
-        data = await response.json();
-        genreList.push(...data.results);
-    }
-    return genreList
+    return [...data.results]
 }

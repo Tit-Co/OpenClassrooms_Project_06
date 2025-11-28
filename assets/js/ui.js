@@ -1,56 +1,35 @@
 const imageCache = new Map();
 
-function preloadImage(url) {
+function preload(url) {
   return new Promise((resolve, reject) => {
-    if (!url) return reject(new Error("No url"));
-
-    const cached = imageCache.get(url);
-    if (cached) {
-      return cached.ok ? resolve(true) : reject(new Error("caching error"));
-    }
-
-    const img = new Image();
-
-    img.onload = () => {
-
-      img.onload = img.onerror = null;
-      imageCache.set(url, { ok: true });
-      resolve(true);
-    };
-    img.onerror = () => {
-
-      img.onload = img.onerror = null;
-      imageCache.set(url, { ok: false });
-      reject(new Error("loading error"));
-    };
-
-    img.src = url;
+    const testImg = new Image();
+    testImg.onload = () => resolve();
+    testImg.onerror = () => reject();
+    testImg.src = url;
   });
 }
 
 async function createImage(movie, target) {
-  const placeholderUrl = "./assets/images/placeholder.png";
+  const placeholder = "./assets/images/placeholder.png";
   const img = document.createElement("img");
   img.alt = `${movie.title} - image ${target}`;
   img.title = `${movie.title} - image ${target}`;
 
-  const url = movie && movie.imageUrl ? movie.imageUrl : null;
+  const url = movie?.imageUrl;
 
-  try {
-    if (url) {
-      await preloadImage(url);
-      img.src = url;
-    } else {
-      img.src = placeholderUrl;
-    }
-  } catch (err) {
-    img.src = placeholderUrl;
+  if (imageCache.has(url)) {
+    img.src = imageCache.get(url) ? url : placeholder;
+    return img;
   }
 
-  img.onerror = () => {
-    img.onerror = null;
-    img.src = placeholderUrl;
-  };
+  try {
+    await preload(url);
+    imageCache.set(url, true);
+    img.src = url;
+  } catch (err) {
+    imageCache.set(url, false);
+    img.src = placeholder;
+  }
 
   return img;
 }
