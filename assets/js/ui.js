@@ -34,15 +34,74 @@ async function createImage(movie, target) {
   return img;
 }
 
+function isTablet() {
+  return window.matchMedia('(max-width: 810px) and (min-width: 481px)').matches;
+}
+
+let savedBodyStyles = {};
+
 function openModal() {
-    document.body.style.overflow = 'hidden';
-    document.getElementById('modal').style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const modal = document.getElementById('modal');
+  const modalContent = document.querySelector('.modalContent');
+
+  modal.style.display = 'block';
+  modal.style.left = '0';
+
+  if (isTablet()) {
+    modal.style.position = 'absolute';
+    modal.style.top = '0';
+    modal.style.height = document.documentElement.scrollHeight + 'px';
+    modal.style.overflow = 'visible';
+
+    modalContent.style.position = 'absolute';
+    const offset = 50;
+    modalContent.style.top = (window.scrollY + offset) + 'px';
+
+    modalContent.style.left = '100%';
+
+  } else {
+
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.height = '100%';
+    modal.style.overflowY = 'auto';
+
+    modalContent.style.position = 'fixed';
+    modalContent.style.top = '50%';
+    modalContent.style.left = '50%';
+    modalContent.style.transform = 'translate(-50%, -50%)';
+    modalContent.style.maxHeight = '90vh';
+    modalContent.style.overflowY = 'auto';
+  }
+
+  savedBodyStyles.overflow = document.body.style.overflow;
+  savedBodyStyles.position = document.body.style.position;
+  savedBodyStyles.top = document.body.style.top;
+
+  document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
-    document.body.style.overflow = 'auto';
-    document.getElementById('modal').style.display = 'none';
+  const modal = document.getElementById('modal');
+  const modalContent = document.querySelector('.modalContent');
+
+  modal.style.display = 'none';
+
+  modal.style.position = '';
+  modal.style.top = '';
+  modal.style.height = '';
+  modal.style.overflow = '';
+
+  modalContent.style.position = '';
+  modalContent.style.top = '';
+  modalContent.style.left = '';
+  modalContent.style.transform = '';
+  modalContent.style.maxHeight = '';
+  modalContent.style.overflowY = '';
+
+  document.body.style.overflow = savedBodyStyles.overflow || '';
+  document.body.style.position = savedBodyStyles.position || '';
+  document.body.style.top = savedBodyStyles.top || '';
 }
 
 function showMore(elementId) {
