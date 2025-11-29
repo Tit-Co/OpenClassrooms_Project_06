@@ -9,7 +9,7 @@ async function getMovies(limit, genre="", sortBy="imdb_score", desc=true) {
 
     let data = await response.json();
 
-    const movieList = [...data.results];
+    const movieList = data.results;
 
     return movieList.slice(0, limit)
 }
@@ -24,5 +24,5 @@ async function getGenres() {
     let response = await fetch(`${genresUrl}?page_size=25`);
     let data = await response.json();
 
-    return [...data.results]
+    return data.results
 }
