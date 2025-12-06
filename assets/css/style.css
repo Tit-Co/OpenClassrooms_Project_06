@@ -261,7 +261,7 @@ h1 {
     text-decoration: none;
 }
 
-.seeLess {
+.hidden  {
     display: none;
 }
 
@@ -287,15 +287,20 @@ h1 {
 
 .modal {
     display: none;
+    position: fixed;
     z-index: 5;
     left: 0;
-    width: 412px;
-    height: auto;
+    top: 0;
+    width: 100vw;                /* prend la largeur de l’écran */
+    height: 100vh;               /* recouvre tout l’écran */
     overflow-y: auto;
+    background-color: rgba(0,0,0,0.5); /* overlay */
     -webkit-overflow-scrolling: touch;
-    background-color: transparent;
+    padding: 16px;               /* marge intérieure pour la modal */
+    box-sizing: border-box;
 }
 
+/* Le contenu de la modal */
 .modalContent {
     max-height: calc(100vh - 100px);
     overflow-y: auto !important;
@@ -304,9 +309,11 @@ h1 {
     line-height: 130%;
     background-color: #fefefe;
     border: 6px solid #000000;
-    width: 412px;
+    width: 100%;                  /* prend la place disponible */
+    max-width: 412px;             /* limite à 412px sans déborder */
     padding: 25px;
-    margin: 0 auto;
+    margin: 40px auto;            /* centré automatiquement */
+    box-sizing: border-box;
 }
 
 .modalContent h1{
@@ -356,19 +363,27 @@ h1 {
     line-height: 150%;
 }
 
+.modal td {
+    position: relative;
+}
+
 .close {
     display: block;
-    position: relative;
+    position: absolute;
     width: 25px;
+    top: 0;
 }
 
 .close span {
     position: absolute;
     display: block;
-    margin: -15px 0 0 0;
+    top: 0;
+    right: 0;
+    margin: 15px 0 0 0;
     color: red;
     font-weight: 600;
     font-size: 75px;
+    height: auto;
 }
 
 .closeButton {
@@ -568,21 +583,43 @@ h1 {
     }
 
     .modal {
-        left: 50%;
-        transform: translateX(-50%);
-        width: 412px;
-        height: auto;
+        padding: 0;
     }
 
     .modalContent {
-        width: 412px;
-        overflow: scroll;
+        margin: auto;
+        top: 50%;
+        left: 50%;
+        position: fixed;
+        transform: translate(-50%, -50%);
+        width: 100%;
+
+        max-height: calc(100vh - 80px);
     }
 
     .modalContent h1{
         text-align: left;
         margin: 0 0 10px 0;
     }
+
+    @-moz-document url-prefix() {
+        @media (min-width: 768px) and (max-width: 1023px) {
+        .modal {
+
+          padding: 0;
+        }
+        .modalContent {
+          position: fixed;
+          left: 50%;
+          top: 50%;
+          transform: translate(-150%, 0%);
+          margin: 0;
+          width: 100%;
+
+          max-height: calc(100vh - 80px);
+        }
+  }
+}
 
     .description{
         margin: 0 20px 40px 0;
@@ -849,8 +886,6 @@ h1 {
         display: none;
         z-index: 5;
         left: 0;
-        width: 100%;
-        height: auto;
         overflow: scroll;
         background-color: transparent;
     }
@@ -862,7 +897,8 @@ h1 {
         background-color: #fefefe;
         margin: 0 auto;
         border: 6px solid #000000;
-        width: 778px;
+        width: 100%;
+        max-width: 778px;
         padding: 25px;
     }
 
@@ -883,14 +919,14 @@ h1 {
 
     .close {
         display: none;
-        position: relative;
+        position: absolute;
         width: 25px;
     }
 
     .close span {
         position: absolute;
         display: block;
-        margin: -15px 0;
+        margin: 0 -15px 0 0;
         color: red;
         font-weight: 600;
         font-size: 75px;

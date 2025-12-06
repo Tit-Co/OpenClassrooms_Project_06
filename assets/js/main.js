@@ -1,5 +1,5 @@
 async function loadOthersCategories(categories) {
-    await renderOthersCategorySection(categories)
+    await renderOthersCategorySection(categories);
 }
 
 async function loadBestMovie() {

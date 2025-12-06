@@ -10,7 +10,7 @@ function preload(url) {
 }
 
 async function createImage(movie, target) {
-  const placeholder = "./assets/images/placeholder.png";
+  const placeholder = "./assets/images/justStreamIt_placeholder.png";
   const img = document.createElement("img");
   img.alt = `${movie.title} - image ${target}`;
   img.title = `${movie.title} - image ${target}`;
@@ -125,11 +125,8 @@ function showLess(elementId) {
 function toggleButtons(elementId, isExpanded) {
   const container = document.getElementById(elementId);
 
-  const showMoreBtn = container.querySelector(".seeMore");
-  const showLessBtn = container.querySelector(".seeLess");
-
-  showMoreBtn.style.display = isExpanded ? 'none' : 'flex';
-  showLessBtn.style.display = isExpanded ? 'flex' : 'none';
+  container.querySelector(".seeMore").classList.toggle("hidden", isExpanded);
+  container.querySelector(".seeLess").classList.toggle("hidden", !isExpanded);
 }
 
 async function loadMoviesContentSection(movies, className) {
@@ -204,6 +201,7 @@ async function loadMoviesContentSection(movies, className) {
     aSeeLess.href = "#" + className + "MoviesContent";
     aSeeLess.innerText = "Voir moins";
     aSeeLess.classList.add("seeLess");
+    aSeeLess.classList.add("hidden");
     aSeeLess.id = "seeLess";
     aSeeLess.addEventListener("click", () => {
         switch(className) {
@@ -314,13 +312,8 @@ async function loadInModal(movie) {
     table.appendChild(tr4);
 
     const tr5 = document.createElement("tr");
-    const amount = movie.boxOffice ? new Intl.NumberFormat("fr",
-        {
-            notation: "compact",
-            compactDisplay: "short",
-            style: "currency",
-            currency: "USD"
-        }).format(movie.boxOffice) : "inconnues";
+
+    const amount = computeBenefits(movie.boxOffice)
 
     tr5.innerHTML = `
         <td class="subtitle">Recettes au box-office: ${amount}</td>

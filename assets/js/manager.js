@@ -2,7 +2,7 @@ function createCategory(categoryDict){
     return category = {
         catId: categoryDict["id"],
         name: categoryDict["name"]
-    }
+    };
 }
 
 function getMovieObject(movieDict){
@@ -25,7 +25,7 @@ function getMovieObject(movieDict){
     votes: movieDict["votes"],
     imageUrl: movieDict["image_url"],
     description: movieDict["long_description"]
-    }
+    };
 }
 
 function computeRating(rating) {
@@ -63,29 +63,39 @@ function computeRating(rating) {
     return "PG-Non évalué";
 }
 
+function computeBenefits(benefit) {
+    return benefit ? new Intl.NumberFormat("fr",
+        {
+            notation: "compact",
+            compactDisplay: "short",
+            style: "currency",
+            currency: "USD"
+        }).format(benefit) : "inconnues";
+}
+
 function computeCategory(category) {
    let categoryList = {
-        "Action": "Films d'action",
+        "Action": "Film d'action",
         "Adult": "Adulte",
-        "Adventure": "Films d'aventures",
-        "Animation": "Films d'animation",
-        "Biography": "Biographies",
-        "Comedy": "Comedies",
-        "Documentary": "Documentaires",
-        "Drama": "Drames",
+        "Adventure": "Film d'aventure",
+        "Animation": "Film d'animation",
+        "Biography": "Biographie",
+        "Comedy": "Comedie",
+        "Documentary": "Documentaire",
+        "Drama": "Drame",
         "Family": "Famille",
-        "Fantasy": "Films fantastiques",
-        "Film-noir": "Films Noirs",
+        "Fantasy": "Film fantastique",
+        "Film-noir": "Film Noir",
         "History": "Histoire",
-        "Horror": "Films d'horreur",
+        "Horror": "Film d'horreur",
         "Music": "Musique",
-        "Musical": "Comédies musicales",
-        "Mystery": "Mystères",
-        "News": "Informations",
-        "Reality-TV": "Télé Réalité",
+        "Musical": "Comédie musicale",
+        "Mystery": "Mystère",
+        "News": "Information",
+        "Reality-TV": "Télé-Réalité",
         "Sci-Fi": "Science-Fiction",
-        "War": "Films de guerre",
-        "Western": "Westerns"
+        "War": "Film de guerre",
+        "Western": "Western"
     }
 
     const cat = categoryList[category];
@@ -97,56 +107,56 @@ function getMovieObjects(movieList) {
     let movies = [];
 
     for(let movie of movieList){
-        movies.push(getMovieObject(movie))
+        movies.push(getMovieObject(movie));
     }
-    return movies
+    return movies;
 }
 
 function getCategoryObjects(categoryList) {
     const categories = []
     for(let category of categoryList) {
-        categories.push(createCategory(category))
+        categories.push(createCategory(category));
     }
-    return categories
+    return categories;
 }
 
 async function getBestMovie(){
-    const movieList = await getMovies(1)
-    const movieId = movieList[0].id
-    const movieImdbUrl = movieList[0].imdb_url
+    const movieList = await getMovies(1);
+    const movieId = movieList[0].id;
+    const movieImdbUrl = movieList[0].imdb_url;
 
-    let movieDict = await getMovieDetails(movieId)
-    movieDict.imdb_url = movieImdbUrl
+    let movieDict = await getMovieDetails(movieId);
+    movieDict.imdb_url = movieImdbUrl;
 
-    return getMovieObject(movieDict)
+    return getMovieObject(movieDict);
 }
 
 async function computeMovieDetails(movieList){
     let movieDictList= []
 
     for(let movie of movieList){
-        const movieId = movie.id
-        const movieImdbUrl = movie.imdb_url
-        let movieDict = await getMovieDetails(movieId)
-        movieDict.imdb_url = movieImdbUrl
-        movieDictList.push(movieDict)
+        const movieId = movie.id;
+        const movieImdbUrl = movie.imdb_url;
+        let movieDict = await getMovieDetails(movieId);
+        movieDict.imdb_url = movieImdbUrl;
+        movieDictList.push(movieDict);
     }
-    return movieDictList
+    return movieDictList;
 }
 
 async function getBestMoviesFromAllGenres() {
-    const movieList = await getMovies(6)
+    const movieList = await getMovies(6);
 
-    return getMovieObjects(await computeMovieDetails(movieList))
+    return getMovieObjects(await computeMovieDetails(movieList));
 }
 
 async function getBestMoviesFromCategory(category){
-    const movieList = await getMovies(6, category)
+    const movieList = await getMovies(6, category);
 
-    return getMovieObjects(await computeMovieDetails(movieList))
+    return getMovieObjects(await computeMovieDetails(movieList));
 }
 
 async function getAllCategories() {
-    const categoryList = await getGenres()
-    return getCategoryObjects(categoryList)
+    const categoryList = await getGenres();
+    return getCategoryObjects(categoryList);
 }

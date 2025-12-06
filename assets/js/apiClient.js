@@ -11,18 +11,18 @@ async function getMovies(limit, genre="", sortBy="imdb_score", desc=true) {
 
     const movieList = data.results;
 
-    return movieList.slice(0, limit)
+    return movieList.slice(0, limit);
 }
 
 async function getMovieDetails(movieId){
     let response = await fetch(`${titlesUrl}${movieId}`);
 
-    return await response.json()
+    return await response.json();
 }
 
 async function getGenres() {
     let response = await fetch(`${genresUrl}?page_size=25`);
     let data = await response.json();
 
-    return data.results
+    return data.results;
 }
